@@ -30,9 +30,12 @@
 # - Ninja (Linux, MSYS2)
 # - Visual Studio
 
+SET(SDL2_SEARCH_PATHS $ENV{VITASDK}/arm-vita-eabi)
+
 # Cache variable that allows you to point CMake at a directory containing
 # an extracted development library.
-set(SDL2_DIR "${SDL2_DIR}" CACHE PATH "Location of SDL2 library directory")
+set(SDL2_DIR "${SDL2_DIR}" CACHE PATH $ENV{VITASDK}/arm-vita-eabi/)
+set(SDL2_INCLUDE_DIR $ENV{VITASDK}/arm-vita-eabi/include/SDL2/)
 
 # Use pkg-config to find library locations in *NIX environments.
 find_package(PkgConfig QUIET)
@@ -64,14 +67,14 @@ endif()
 # Find the SDL2 and SDL2main libraries
 if(CMAKE_SIZEOF_VOID_P STREQUAL 8)
     find_library(SDL2_LIBRARY "SDL2"
-        HINTS "${SDL2_DIR}/lib/x64" ${PC_SDL2_LIBRARY_DIRS})
+        HINTS "${SDL2_DIR}/lib" ${PC_SDL2_LIBRARY_DIRS})
     find_library(SDL2_MAIN_LIBRARY "SDL2main"
-        HINTS "${SDL2_DIR}/lib/x64" ${PC_SDL2_LIBRARY_DIRS})
+        HINTS "${SDL2_DIR}/lib" ${PC_SDL2_LIBRARY_DIRS})
 else()
     find_library(SDL2_LIBRARY "SDL2"
-        HINTS "${SDL2_DIR}/lib/x86" ${PC_SDL2_LIBRARY_DIRS})
+        HINTS "${SDL2_DIR}/lib" ${PC_SDL2_LIBRARY_DIRS})
     find_library(SDL2_MAIN_LIBRARY "SDL2main"
-        HINTS "${SDL2_DIR}/lib/x86" ${PC_SDL2_LIBRARY_DIRS})
+        HINTS "${SDL2_DIR}/lib" ${PC_SDL2_LIBRARY_DIRS})
 endif()
 set(SDL2_LIBRARIES "${SDL2_MAIN_LIBRARY}" "${SDL2_LIBRARY}")
 

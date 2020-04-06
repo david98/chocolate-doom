@@ -33,6 +33,7 @@
 # Cache variable that allows you to point CMake at a directory containing
 # an extracted development library.
 set(SDL2_NET_DIR "${SDL2_NET_DIR}" CACHE PATH "Location of SDL2_net library directory")
+set(SDL2_NET_INCLUDE_DIR $ENV{VITASDK}/arm-vita-eabi/include/SDL2/)
 
 # Use pkg-config to find library locations in *NIX environments.
 find_package(PkgConfig QUIET)

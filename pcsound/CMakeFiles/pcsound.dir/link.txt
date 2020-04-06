@@ -1,0 +1,2 @@
+/usr/local/vitasdk/bin/arm-vita-eabi-ar qc libpcsound.a  CMakeFiles/pcsound.dir/pcsound.c.obj CMakeFiles/pcsound.dir/pcsound_bsd.c.obj CMakeFiles/pcsound.dir/pcsound_sdl.c.obj CMakeFiles/pcsound.dir/pcsound_linux.c.obj CMakeFiles/pcsound.dir/pcsound_win32.c.obj
+/usr/local/vitasdk/bin/arm-vita-eabi-ranlib libpcsound.a

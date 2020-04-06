@@ -68,4 +68,22 @@ add_library(doom STATIC
             wi_stuff.c      wi_stuff.h)
 
 target_include_directories(doom PRIVATE "../" "${CMAKE_CURRENT_BINARY_DIR}/../../")
-target_link_libraries(doom SDL2::SDL2 SDL2::mixer SDL2::net)
+target_link_libraries(doom SDL2::SDL2 SDL2::mixer SDL2::net
+  vita2d
+  SceDisplay_stub
+  SceCtrl_stub
+  SceAudio_stub
+  SceSysmodule_stub
+  SceGxm_stub
+  SceCommonDialog_stub
+  SceTouch_stub
+  SceHid_stub
+  SceNetCtl_stub
+  FLAC
+  ogg
+  mikmod
+  mpg123
+  vorbis
+  opus
+  m
+)

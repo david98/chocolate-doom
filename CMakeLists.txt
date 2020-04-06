@@ -1,7 +1,21 @@
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 cmake_minimum_required(VERSION 3.7.2)
-project("Chocolate Doom" VERSION 3.0.0 LANGUAGES C)
+
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+  if(DEFINED ENV{VITASDK})
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VITASDK}/share/vita.toolchain.cmake" CACHE PATH "toolchain file")
+  else()
+    message(FATAL_ERROR "Please define VITASDK to point to your SDK path!")
+  endif()
+endif()
+
+project("ChocolateDoom" VERSION 3.0.0 LANGUAGES C)
+include("${VITASDK}/share/vita.cmake" REQUIRED)
+
+set(VITA_APP_NAME "ChocolateDoom")
+set(VITA_TITLEID  "DAVI00017")
+set(VITA_VERSION  "01.00")
 
 # Autotools variables
 set(top_srcdir ${CMAKE_CURRENT_SOURCE_DIR})
@@ -28,9 +42,16 @@ else()
                         "-Wredundant-decls")
 endif()
 
-find_package(SDL2 2.0.1)
-find_package(SDL2_mixer 2.0.0)
-find_package(SDL2_net 2.0.0)
+find_package(SDL2)
+find_package(SDL2_mixer)
+find_package(SDL2_net)
+FIND_LIBRARY(SDL2MAIN_LIBRARY
+    NAMES SDL2main
+    HINTS
+    $ENV{SDL2DIR}
+    PATH_SUFFIXES lib64 lib lib/${SDL2_PROCESSOR_ARCH}
+    PATHS ${SDL2_SEARCH_PATHS}
+)
 
 # Check for libsamplerate.
 find_package(samplerate)
@@ -70,3 +91,4 @@ configure_file(src/setup/setup-manifest.xml.in src/setup/setup-manifest.xml)
 foreach(SUBDIR textscreen midiproc opl pcsound src)
     add_subdirectory("${SUBDIR}")
 endforeach()
+
