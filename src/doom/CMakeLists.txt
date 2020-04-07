@@ -11,6 +11,7 @@ add_library(doom STATIC
             deh_thing.c
             deh_weapon.c
                             d_englsh.h
+            debugScreen.c   debugScreen.c
             d_items.c       d_items.h
             d_main.c        d_main.h
             d_net.c
@@ -70,6 +71,7 @@ add_library(doom STATIC
 target_include_directories(doom PRIVATE "../" "${CMAKE_CURRENT_BINARY_DIR}/../../")
 target_link_libraries(doom SDL2::SDL2 SDL2::mixer SDL2::net
   vita2d
+  SceLibKernel_stub # this line is only for demonstration. It's not needed as
   SceDisplay_stub
   SceCtrl_stub
   SceAudio_stub

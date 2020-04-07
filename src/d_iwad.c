@@ -602,6 +602,13 @@ static void AddIWADPath(const char *path, const char *suffix)
     free(dup_path);
 }
 
+#ifdef VITA
+static void AddVitaDirs(void)
+{
+    AddIWADDir("ux0:/app/DAVI00017/wads");
+}
+#endif
+
 #ifndef _WIN32
 // Add standard directories where IWADs are located on Unix systems.
 // To respect the freedesktop.org specification we support overriding
@@ -743,10 +750,14 @@ static void BuildIWADDirList(void)
     CheckSteamGUSPatches();
 
 #else
-    AddXdgDirs();
-#ifndef __MACOSX__
-    AddSteamDirs();
-#endif
+    #ifdef VITA
+        AddVitaDirs();
+    #else
+        AddXdgDirs();
+        #ifndef __MACOSX__
+            AddSteamDirs();
+        #endif
+    #endif
 #endif
 
     // Don't run this function again.
