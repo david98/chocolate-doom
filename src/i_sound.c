@@ -229,10 +229,13 @@ void I_InitSound(boolean use_sfx_prefix)
     nomusicpacks = M_ParmExists("-nomusicpacks");
 
     // Auto configure the music pack directory.
-    M_SetMusicPackDir();
+    //M_SetMusicPackDir();
 
     // Initialize the sound and music subsystems.
-
+    nosound = 1;
+    nomusic = 1;
+    nosfx = 1;
+    nomusicpacks = 1;
     if (!nosound && !screensaver_mode)
     {
         // This is kind of a hack. If native MIDI is enabled, set up

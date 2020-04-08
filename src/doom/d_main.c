@@ -1459,7 +1459,6 @@ void D_DoomMain (void)
     // we're playing and which version of Vanilla Doom we need to emulate.
     D_IdentifyVersion();
     InitGameVersion();
-
     // Check which IWAD variant we are using.
 
     if (W_CheckNumForName("FREEDOOM") >= 0)
